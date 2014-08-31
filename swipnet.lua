@@ -26,6 +26,8 @@ wget.callbacks.download_child_p = function(urlpos, parent, depth, start_url_pars
     return false
   elseif string.match(url, "www%.swipnet%.se/") then
     return false
+  elseif string.match(url, "www%.home%.swipnet%.se/") then
+    return false
   elseif string.match(url, "irc%.swipnet%.se/") then
     return false
   elseif string.match(url, "///") then
@@ -45,6 +47,10 @@ wget.callbacks.download_child_p = function(urlpos, parent, depth, start_url_pars
     else
       return verdict
     end
+  elseif string.match(url, "http://[^%./]+%.[^%./]+%.[^%./]+%.[^/]+/") then
+    return false
+  elseif string.match(url, "http://mailto[^/]+/") then
+    return false
   else
     return verdict
   end
