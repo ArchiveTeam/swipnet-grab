@@ -30,11 +30,14 @@ wget.callbacks.download_child_p = function(urlpos, parent, depth, start_url_pars
     return false
   elseif string.match(url, "///") then
     return false
-  elseif string.match(url, "swipnet%.se/([^/]+)/") then
+  elseif string.match(url, "home[0-9]+%.swipnet%.se/[^/]+/") then
     local directory_name = string.match(url, "swipnet%.se/([^/]+)/")
+    local home_name = string.match(url, "(home[0-9]+)%.swipnet%.se")
     directory_name = string.gsub(directory_name, '%%7E', '~')
     
-    if directory_name ~= item_value then
+    if home_name ~= item_type then
+      return false
+    elseif directory_name ~= item_value then
       -- do not want someone else's homepage
        -- io.stdout:write("\n Reject " .. url .. " " .. directory_name .. "\n")
        -- io.stdout:flush()
